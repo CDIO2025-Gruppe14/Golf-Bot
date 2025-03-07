@@ -1,0 +1,12 @@
+Setup: 1
+Lower White HSV: [0, 0, 221]
+Upper White HSV: [180, 20, 255]
+Lower Orange HSV: [22, 150, 100]
+Upper Orange HSV: [41, 255, 255]
+Field Lower Orange HSV: [5, 64, 79]
+Field Upper Orange HSV: [13, 255, 255]
+Num Cells: 50
+Param1: 10
+Param2: 10
+Min Radius: 4
+Max Radius: 7
