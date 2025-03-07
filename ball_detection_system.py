@@ -153,6 +153,15 @@ def detect_field(image, hsv, lower_orange_field, upper_orange_field, show_mask):
 
 def save_settings(filename="settings.txt"):
     with open(filename, "w") as f:
+
+        # Write comments at the top of the file
+        f.write("# This file is used for the settings in the program\n")
+        f.write("# It stores the last used values whenever you quit the program with 'q'\n")
+        f.write("# You can also change these upon startup if needed\n\n")
+        
+        f.write("# If you want to use these values and not use the setup, Then set: Setup: 0\n")
+        f.write("# If you want to use the setup and pick these values with the trackbars: Setup: 1\n\n")
+
         f.write(f"Setup: {setup}\n")
         f.write(f"Lower White HSV: {lower_white.tolist()}\n")
         f.write(f"Upper White HSV: {upper_white.tolist()}\n")
