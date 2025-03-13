@@ -1,0 +1,19 @@
+# This file is used for the settings in the program
+# It stores the last used values whenever you quit the program with 'q'
+# You can also change these upon startup if needed
+
+# If you want to use these values and not use the setup, Then set: Setup: 0
+# If you want to use the setup and pick these values with the trackbars: Setup: 1
+
+Setup: 1
+Lower White HSV: [0, 0, 221]
+Upper White HSV: [180, 20, 255]
+Lower Orange HSV: [22, 150, 100]
+Upper Orange HSV: [41, 255, 255]
+Field Lower Orange HSV: [5, 64, 79]
+Field Upper Orange HSV: [13, 255, 255]
+Num Cells: 50
+Param1: 10
+Param2: 10
+Min Radius: 4
+Max Radius: 7
