@@ -6,10 +6,10 @@
 # If you want to use the setup and pick these values with the trackbars: Setup: 1
 
 Setup: 1
-Lower White HSV: [0, 0, 221]
-Upper White HSV: [180, 20, 255]
-Lower Orange HSV: [22, 150, 100]
-Upper Orange HSV: [41, 255, 255]
+Lower White HSV: [0, 0, 174]
+Upper White HSV: [180, 11, 255]
+Lower Orange HSV: [0, 70, 100]
+Upper Orange HSV: [21, 255, 255]
 Field Lower Orange HSV: [5, 64, 79]
 Field Upper Orange HSV: [13, 255, 255]
 Num Cells: 50
