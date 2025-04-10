@@ -1,0 +1,38 @@
+@startuml
+title Crane System Overview
+
+package "Hardware" {
+    [Crane Structure] --> [Motors] : Mounted on
+    [Motors] --> [Gripping Mechanism] : Controls
+    [Gripping Mechanism] --> [Claw] : Holds object
+    [Camera Mount] --> [Camera] : Mounted
+}
+
+package "Electronics" {
+    [Controller (Arduino)] --> [Motors] : Sends motor signals
+    [Controller (Arduino)] --> [Servo Motor] : Controls claw movement
+    [Camera] --> [Controller (Arduino)] : Sends data
+}
+
+package "Software" {
+    [Python Software] --> [Image Processing]
+    [Image Processing] --> [Ball Detection]
+    [Ball Detection] --> [Coordinate Calculation]
+    [Coordinate Calculation] --> [Controller (Arduino)] : Sends positions
+    [Controller (Arduino)] --> [Motor Control Logic] : Executes commands
+}
+
+[Camera] --> [Python Software] : Sends image/video
+[Python Software] --> [Controller (Arduino)] : Sends commands
+
+note right of [Crane Structure]
+  3D-printed, steel parts, bolts, step-motor, step-driver, CNC shield & plactic.
+  Support arm and base
+end note
+
+note bottom of [Camera]
+  Fixed position on stand/mount
+  Used for ball tracking in colour and etc.
+end note
+
+@enduml
