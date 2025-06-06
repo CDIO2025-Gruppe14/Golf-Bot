@@ -6,7 +6,7 @@ tank = MoveTank(OUTPUT_A, OUTPUT_B)
 
 async def handler(websocket, path):
     async for message in websocket:
-        print(f"Received: {message}")
+        print("Received: {}".format(message))
         if message == "forward":
             tank.on_for_seconds(SpeedPercent(50), SpeedPercent(50), 2)
         elif message == "backward":
