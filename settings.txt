@@ -5,18 +5,18 @@
 # If you want to use these values and not use the setup, Then set: Setup: 0
 # If you want to use the setup and pick these values with the trackbars: Setup: 1
 
-Setup: 1
+Setup: 0
 Using Green Corners: 1
-Lower White HSV: [0, 0, 195]
-Upper White HSV: [180, 30, 255]
-Lower Orange HSV: [0, 84, 198]
-Upper Orange HSV: [56, 255, 255]
+Lower White HSV: [0, 0, 179]
+Upper White HSV: [180, 15, 255]
+Lower Orange HSV: [8, 0, 222]
+Upper Orange HSV: [49, 255, 255]
 Field Lower Orange HSV: [0, 39, 80]
 Field Upper Orange HSV: [24, 86, 255]
 Field Lower Green HSV: [50, 50, 0]
 Field Upper Green HSV: [91, 168, 255]
-Num Cells: 30
+Num Cells: 60
 Param1: 11
 Param2: 12
-Min Radius: 4
+Min Radius: 3
 Max Radius: 5
