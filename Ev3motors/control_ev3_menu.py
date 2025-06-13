@@ -1,7 +1,7 @@
 import socket
 import time
 
-HOST = '172.20.10.3'  # ← husk at opdatere hvis IP ændres
+HOST = '0.0.0.0'  # ← husk igen at opdatere, hvis IP ændres
 PORT = 65432
 
 def send_command(command):
