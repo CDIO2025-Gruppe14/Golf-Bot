@@ -8,9 +8,9 @@
 Setup: 0
 Using Green Corners: 1
 Lower White HSV: [0, 0, 179]
-Upper White HSV: [180, 15, 255]
-Lower Orange HSV: [8, 0, 222]
-Upper Orange HSV: [49, 255, 255]
+Upper White HSV: [180, 21, 255]
+Lower Orange HSV: [9, 0, 191]
+Upper Orange HSV: [48, 255, 255]
 Field Lower Orange HSV: [0, 39, 80]
 Field Upper Orange HSV: [24, 86, 255]
 Field Lower Green HSV: [50, 50, 0]
@@ -18,5 +18,5 @@ Field Upper Green HSV: [91, 168, 255]
 Num Cells: 60
 Param1: 11
 Param2: 12
-Min Radius: 3
+Min Radius: 4
 Max Radius: 5
