@@ -18,7 +18,7 @@ def get_motor_controller(motor_str):
     else:
         raise ValueError("Invalid motor selection")
 
-HOST = '0.0.0.0'  # Your EV3's IP
+HOST = '172.20.10.3'  # EV3 IP
 PORT = 65432
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
@@ -29,37 +29,39 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
     while True:
         print("Waiting for a new client connection...")
         conn, addr = server_socket.accept()
+        print("Connected by", addr)
+
         with conn:
-            print("Connected by {}".format(addr))
             while True:
-                data = conn.recv(1024)
-                if not data:
-                    print("Client disconnected.")
-                    break
-
-                command = data.decode().strip()
-                print("Received command:", command)
-
-                parts = command.split(':')
-                if len(parts) not in [2, 3]:
-                    print("Invalid command format. Expected action:motor[:speed]")
-                    continue
-
-                action = parts[0]
-                motor_str = parts[1]
-                speed = int(parts[2]) if len(parts) == 3 else 50  # Default speed = 50%
-
                 try:
+                    data = conn.recv(1024)
+                    if not data:
+                        print("Client disconnected.")
+                        break
+
+                    command = data.decode().strip()
+                    print("Received command:", command)
+
+                    parts = command.split(':')
+                    if len(parts) not in [2, 3]:
+                        print("Invalid format. Use action:motor[:speed]")
+                        continue
+
+                    action = parts[0]
+                    motor_str = parts[1]
+                    speed = int(parts[2]) if len(parts) == 3 else 50
+
                     controller = get_motor_controller(motor_str)
+
                     if isinstance(controller, MoveTank):
                         if action == "forward":
-                            controller.on_for_seconds(SpeedPercent(speed), SpeedPercent(speed), 2)
+                            controller.on(SpeedPercent(speed), SpeedPercent(speed))
                         elif action == "backward":
-                            controller.on_for_seconds(SpeedPercent(-speed), SpeedPercent(-speed), 2)
+                            controller.on(SpeedPercent(-speed), SpeedPercent(-speed))
                         elif action == "left":
-                            controller.on_for_seconds(SpeedPercent(-speed), SpeedPercent(speed), 1)
+                            controller.on(SpeedPercent(-speed), SpeedPercent(speed))
                         elif action == "right":
-                            controller.on_for_seconds(SpeedPercent(speed), SpeedPercent(-speed), 1)
+                            controller.on(SpeedPercent(speed), SpeedPercent(-speed))
                         elif action == "stop":
                             controller.off()
                         else:
@@ -67,15 +69,16 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
 
                     elif isinstance(controller, LargeMotor):
                         if action == "forward":
-                            controller.on_for_seconds(SpeedPercent(speed), 2)
+                            controller.on(SpeedPercent(speed))
                         elif action == "backward":
-                            controller.on_for_seconds(SpeedPercent(-speed), 2)
+                            controller.on(SpeedPercent(-speed))
                         elif action == "stop":
                             controller.off()
                         else:
-                            print("Only forward/backward/stop supported for single motor.")
+                            print("Unknown action for single motor.")
                 except Exception as e:
-                    print("Error handling command:", e)
+                    print("Error:", e)
+                    break
 
 """ import asyncio
 import websockets

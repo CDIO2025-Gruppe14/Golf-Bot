@@ -1,7 +1,7 @@
 import socket
 import time
 
-HOST = '0.0.0.0'  # ← husk igen at opdatere, hvis IP ændres
+HOST = '172.20.10.3'  # ← husk igen at opdatere, hvis IP ændres
 PORT = 65432
 
 def send_command(command):
@@ -17,6 +17,7 @@ def manual_keyboard_mode():
     print("\n--- Simple Keyboard Control Mode ---")
     print("W = Forward | S = Backward | A = Left | D = Right | Q = Stop | X = Exit")
     motor_ports = input("Enter motor ports (e.g., A+B): ").strip().upper().replace(' ', '')
+    speed = input("Enter speed (e.g., 75 for 75%): ").strip()
 
     while True:
         key = input("Enter command: ").strip().lower()
@@ -24,13 +25,13 @@ def manual_keyboard_mode():
         if key == 'w':
             send_command("forward:{}:{}".format(motor_ports, speed))
         elif key == 's':
-            send_command("forward:{}:{}".format(motor_ports, speed))
+            send_command("backward:{}:{}".format(motor_ports, speed))
         elif key == 'a':
-            send_command("forward:{}:{}".format(motor_ports, speed))
+            send_command("left:{}:{}".format(motor_ports, speed))
         elif key == 'd':
-            send_command("forward:{}:{}".format(motor_ports, speed))
+            send_command("right:{}:{}".format(motor_ports, speed))
         elif key == 'q':
-            send_command("forward:{}:{}".format(motor_ports, speed))
+            send_command("stop:{}:{}".format(motor_ports, speed))
         elif key == 'x':
             print("Exiting keyboard mode.")
             break
@@ -61,7 +62,6 @@ def menu():
                 '4': 'right',
                 '5': 'stop'
             }
-            speed = input("Enter speed (e.g., 75 for 75%): ").strip()
             command = "{}:{}:{}".format(command_map[choice], motor_ports, speed)
             send_command(command)
 
