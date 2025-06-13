@@ -1,5 +1,21 @@
 import socket
 from ev3dev2.motor import LargeMotor, MoveTank, SpeedPercent, OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D
+import os
+
+def handle_client(conn, addr):
+    print("Connected by {}".format(addr))
+    header = conn.recv(1024)
+    if header.startswith(b'FILE:'):
+        filename = header[5:].strip().decode()
+        with open(filename, 'wb') as f:
+            while True:
+                data = conn.recv(1024)
+                if not data:
+                    break
+                f.write(data)
+        print("File {} received and saved.".format(filename))
+    else:
+        print("Unknown data received.")
 
 # Map user-friendly port names to ev3dev constants
 PORT_MAP = {
@@ -18,7 +34,7 @@ def get_motor_controller(motor_str):
     else:
         raise ValueError("Invalid motor selection")
 
-HOST = '172.20.10.3'  # Your EV3's IP
+HOST = '172.20.10.3'  # enter EV3 IP address
 PORT = 65432
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
@@ -38,44 +54,39 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
                     break
 
                 command = data.decode().strip()
-                print("Received command:", command)
+                print("Received command: " + command)
 
-                parts = command.split(':')
-                if len(parts) not in [2, 3]:
-                    print("Invalid command format. Expected action:motor[:speed]")
+                if ':' not in command:
+                    print("Invalid command format.")
                     continue
 
-                action = parts[0]
-                motor_str = parts[1]
-                speed = int(parts[2]) if len(parts) == 3 else 50  # Default speed = 50%
-
+                action, motor_str = command.split(':', 1)
                 try:
                     controller = get_motor_controller(motor_str)
                     if isinstance(controller, MoveTank):
                         if action == "forward":
-                            controller.on_for_seconds(SpeedPercent(speed), SpeedPercent(speed), 2)
+                            controller.on_for_seconds(SpeedPercent(50), SpeedPercent(50), 2)
                         elif action == "backward":
-                            controller.on_for_seconds(SpeedPercent(-speed), SpeedPercent(-speed), 2)
+                            controller.on_for_seconds(SpeedPercent(-50), SpeedPercent(-50), 2)
                         elif action == "left":
-                            controller.on_for_seconds(SpeedPercent(-speed), SpeedPercent(speed), 1)
+                            controller.on_for_seconds(SpeedPercent(-30), SpeedPercent(30), 1)
                         elif action == "right":
-                            controller.on_for_seconds(SpeedPercent(speed), SpeedPercent(-speed), 1)
+                            controller.on_for_seconds(SpeedPercent(30), SpeedPercent(-30), 1)
                         elif action == "stop":
                             controller.off()
                         else:
-                            print("Unknown action:", action)
-
+                            print("Unknown command: " + action)
                     elif isinstance(controller, LargeMotor):
                         if action == "forward":
-                            controller.on_for_seconds(SpeedPercent(speed), 2)
+                            controller.on_for_seconds(SpeedPercent(50), 2)
                         elif action == "backward":
-                            controller.on_for_seconds(SpeedPercent(-speed), 2)
+                            controller.on_for_seconds(SpeedPercent(-50), 2)
                         elif action == "stop":
                             controller.off()
                         else:
                             print("Only forward/backward/stop supported for single motor.")
                 except Exception as e:
-                    print("Error handling command:", e)
+                    print("Error handling command: {}".format(e))
 
 """ import asyncio
 import websockets
