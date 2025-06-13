@@ -1,7 +1,7 @@
 import socket
 from ev3dev2.motor import LargeMotor, MoveTank, SpeedPercent, OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D
 
-# Map user-friendly port names to ev3dev constants
+# Map port names to ev3dev constants
 PORT_MAP = {
     'A': OUTPUT_A,
     'B': OUTPUT_B,
@@ -18,7 +18,7 @@ def get_motor_controller(motor_str):
     else:
         raise ValueError("Invalid motor selection")
 
-HOST = '172.20.10.3'  # Your EV3's IP
+HOST = '0.0.0.0'  # Your EV3's IP
 PORT = 65432
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
