@@ -53,9 +53,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
                     controller = get_motor_controller(motor_str)
 
                     if isinstance(controller, MoveTank):
-                        if action == "forward":
+                        if action == "up":
                             controller.on_for_seconds(SpeedPercent(speed), SpeedPercent(speed), duration)
-                        elif action == "backward":
+                        elif action == "down":
                             controller.on_for_seconds(SpeedPercent(-speed), SpeedPercent(-speed), duration)
                         elif action == "left":
                             controller.on_for_seconds(SpeedPercent(-speed), SpeedPercent(speed), duration)
@@ -67,9 +67,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
                             print("Unknown action:", action)
 
                     elif isinstance(controller, LargeMotor):
-                        if action == "forward":
+                        if action == "up":
                             controller.on_for_seconds(SpeedPercent(speed), duration)
-                        elif action == "backward":
+                        elif action == "down":
                             controller.on_for_seconds(SpeedPercent(-speed), duration)
                         elif action == "stop":
                             controller.off()
