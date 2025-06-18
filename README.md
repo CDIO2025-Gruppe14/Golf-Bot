@@ -1,7 +1,9 @@
-# How to run the EV3:
+# Main system for our route planning and image recognition is in ball_detection_system.ipynb file
+
+## How to run the EV3:
 
 > **⚠️ Note:**  
-> The 1. step is **not necessary** as the files should already be added to the EV3 device.
+> The 1. step is **not always necessary** as the files should already be added to the EV3 device.
 
 *How to add the files onto the Ev3:*
 1. *scp -r "/path/to/your/local/Ev3motors" robot@<EV3_IP_ADDRESS>:~*  
