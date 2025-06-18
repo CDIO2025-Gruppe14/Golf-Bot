@@ -2,6 +2,9 @@ import serial
 import time
 
 SERIAL_PORT = "/dev/cu.usbserial-110" # skal måske ændres alt efter computer, men det er hvor arduino er på
+#TODO til nr 2 arduino kald enten SERIAL_PORT 2 osv
+
+
 BAUD_RATE = 115200
 
 # Connect til arduino
@@ -30,5 +33,8 @@ while ser.in_waiting:
     print(ser.readline().decode().strip())
 
 ser.close()
+
+
+
 
 
