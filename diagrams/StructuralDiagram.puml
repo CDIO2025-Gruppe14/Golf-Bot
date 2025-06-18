@@ -1,0 +1,35 @@
+@startuml
+title Crane System Structure
+
+package "Hardware" {
+    [Crane Structure]
+    [Motors]
+    [Bucket (ball pickup mechanism)]
+    [Camera Mount]
+    [Camera]
+}
+
+package "Electronics" {
+    [Controller (Arduino)]
+    [Servo Motor]
+}
+
+package "Software" {
+    [Python Software]
+    [Image Processing]
+    [Ball Detection]
+    [Coordinate Calculation]
+    [Motor Control Logic]
+}
+
+note right of [Crane Structure]
+  Mechanical parts (3D-printed), steel parts, bolts, step-motor, step-driver, LEGO parts, frame, Arduinos, CNC shield/controller & plastic.
+  Support for ball pickup and camera mount.
+end note
+
+note bottom of [Camera]
+  Fixed position on stand/mount  
+  Used for ball tracking algorithm routes in colour and etc.
+end note
+
+@enduml
