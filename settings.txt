@@ -7,8 +7,8 @@
 
 Setup: 0
 Using Green Corners: 1
-Lower White HSV: [0, 0, 195]
-Upper White HSV: [180, 14, 255]
+Lower White HSV: [0, 0, 167]
+Upper White HSV: [180, 29, 255]
 Lower Orange HSV: [9, 0, 191]
 Upper Orange HSV: [48, 255, 255]
 Field Lower Orange HSV: [0, 29, 84]
